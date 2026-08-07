@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TO CONFIRM: replace with the live domain before publishing.
+Sitemap: https://www.italyeducationconsultants.com/sitemap.xml
