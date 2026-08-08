@@ -87,6 +87,12 @@ export const STATS = [
   { value: 99, suffix: '%', label: 'Reported Visa Success Rate' },
 ];
 
+/**
+ * Links flagged `external` are real routes, so they are never prefixed with the
+ * home-page path — they work identically from any page.
+ */
+export const CONTACT_PAGE = '/contact/';
+
 export const NAV_LINKS = [
   { label: 'About', href: '#about' },
   { label: 'Services', href: '#services' },
@@ -94,6 +100,7 @@ export const NAV_LINKS = [
   { label: 'Why Us', href: '#why-us' },
   { label: 'Success Stories', href: '#stories' },
   { label: 'FAQ', href: '#faq' },
+  { label: 'Contact Us', href: CONTACT_PAGE, external: true },
 ];
 
 export const VALUE_CARDS = [
@@ -429,7 +436,7 @@ export const FOOTER_LINKS = {
     { label: 'Scholarships', href: '#scholarships' },
     { label: 'Success Stories', href: '#stories' },
     { label: 'FAQ', href: '#faq' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Contact Us', href: CONTACT_PAGE, external: true },
   ],
   services: [
     { label: 'Profile Evaluation', href: '#services' },

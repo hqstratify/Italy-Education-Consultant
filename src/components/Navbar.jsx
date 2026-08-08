@@ -4,9 +4,13 @@ import Wordmark from './ui/Wordmark';
 import { NAV_LINKS, PHONE_HREF, PHONE_DISPLAY } from '../data/site';
 
 /**
- * `linkPrefix` is '' on the home page and '/' on the standalone legal pages,
- * so section anchors resolve back to the home page from anywhere.
+ * `linkPrefix` is '' on the home page and '/' on the standalone pages, so
+ * section anchors resolve back to the home page from anywhere. Links flagged
+ * `external` are real routes and are never prefixed.
  */
+const resolve = (link, linkPrefix) =>
+  link.external ? link.href : `${linkPrefix}${link.href}`;
+
 export default function Navbar({ linkPrefix = '' }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -52,12 +56,14 @@ export default function Navbar({ linkPrefix = '' }) {
           <Wordmark />
         </a>
 
-        <ul className="hidden items-center gap-7 lg:flex">
+        {/* gap tightens at lg so all seven items fit on one line; the original
+            spacing returns from xl up, where there is room for it. */}
+        <ul className="hidden items-center gap-5 lg:flex xl:gap-7">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <a
-                href={`${linkPrefix}${link.href}`}
-                className="group relative rounded py-2 text-[13.5px] font-medium text-charcoal/75 transition-colors hover:text-forest"
+                href={resolve(link, linkPrefix)}
+                className="group relative rounded whitespace-nowrap py-2 text-[13.5px] font-medium text-charcoal/75 transition-colors hover:text-forest"
               >
                 {link.label}
                 <span
@@ -104,7 +110,7 @@ export default function Navbar({ linkPrefix = '' }) {
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <a
-                href={`${linkPrefix}${link.href}`}
+                href={resolve(link, linkPrefix)}
                 onClick={() => setOpen(false)}
                 className="block border-b border-forest/5 py-4 font-display text-2xl text-forest"
               >

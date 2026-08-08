@@ -51,16 +51,29 @@ correctly.
   use the business short link `https://maps.app.goo.gl/w7wQryRTsKEsRbgY6`. The embedded map
   is pinned to the same resolved coordinates (28.6487068, 77.12657).
 
-## Legal pages
+## Standalone pages
 
-Three standalone pages are built as real static routes, plus the image credits page:
+Every page below is a real static route, built through Vite's multi-page config:
 
 | Route | Source |
 | --- | --- |
+| `/contact/` | `src/pages/ContactPage.jsx` |
 | `/privacy-policy/` | `src/legal/PrivacyPolicy.jsx` |
 | `/terms-and-conditions/` | `src/legal/TermsConditions.jsx` |
 | `/disclaimer/` | `src/legal/Disclaimer.jsx` |
 | `/image-credits.html` | `public/image-credits.html` |
+
+### Contact page
+
+Linked from the navbar (desktop and mobile menu) and the footer's Quick Links, via
+`CONTACT_PAGE` in `site.js`. Nav entries carry an `external: true` flag when they point at
+a real route rather than a home-page anchor, so they are never path-prefixed.
+
+Sections: hero, four contact cards (phone / office / hours / Instagram), the enquiry form,
+the map with Get Directions, and a closing CTA. All contact details are pulled from
+`site.js`, so nothing here can drift out of sync with the home page.
+
+**The form has no destination yet** — see "Contact form" under Still outstanding.
 
 They are wired through Vite's multi-page build (`rollupOptions.input` in `vite.config.js`),
 each with its own `index.html` shell and entry file. Because they are genuinely static
@@ -100,12 +113,18 @@ the names, so the two always match). Swap them for verified Google Reviews when 
 Only add `Review` / `AggregateRating` schema once genuine review data exists — it is
 intentionally absent from `index.html`.
 
-### 4. Lead form — the one real gap
+### 4. Forms — the one real gap
 
-`handleSubmit` in `src/components/LeadForm.jsx` validates client-side and shows a
-confirmation offering a direct call, but **the submitted details currently go nowhere**.
-With WhatsApp and the business email both removed, connecting this to a CRM or form
-backend is now the only way an enquiry reaches you in writing. Do this before launch.
+Two forms need a destination before launch. With WhatsApp and the business email both
+removed, a backend is the only way any enquiry reaches you in writing.
+
+- **Contact form** — `submitEnquiry()` in `src/pages/ContactPage.jsx`. It currently
+  *throws*, so a completed form shows the error state, which points the visitor at the
+  phone number. That is deliberate: it never tells someone their message was delivered when
+  it was not. Replace the throw with a real `fetch` to your endpoint and the success state
+  (already built and tested) takes over.
+- **Home-page profile assessment** — `handleSubmit` in `src/components/LeadForm.jsx`
+  validates and confirms client-side only; the details go nowhere.
 
 ### 5. Imagery — `src/data/images.js`
 
@@ -154,8 +173,9 @@ Schema included: `LocalBusiness` + `EducationalOrganization`, `WebSite`, `Breadc
 
 ```
 index.html                 meta, fonts, LocalBusiness/EducationalOrganization/Breadcrumb JSON-LD
-privacy-policy/            \
-terms-and-conditions/       > HTML shells for the three legal routes
+contact/                   \
+privacy-policy/             \  HTML shells for the four standalone routes
+terms-and-conditions/       /
 disclaimer/                /
 public/
   images/                  seven photographs + CREDITS.md
@@ -169,6 +189,7 @@ src/
   data/images.js           image sources + alt text
   hooks/useInView.js       one-shot IntersectionObserver
   legal/                   LegalPage shell, the three documents, and their entry files
+  pages/                   ContactPage + its entry file
   components/
     ui/                    Reveal, Section/SectionHeading/Eyebrow, SmartImage, Counter,
                            Wordmark, InstagramIcon
