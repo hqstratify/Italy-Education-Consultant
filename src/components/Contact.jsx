@@ -6,6 +6,7 @@ import {
   HOURS,
   PHONE_DISPLAY,
   PHONE_HREF,
+  PHONE_NUMBERS,
   DIRECTIONS_URL,
   MAP_EMBED_URL,
 } from '../data/site';
@@ -54,9 +55,18 @@ export default function Contact() {
             </InfoBlock>
 
             <InfoBlock icon={Phone} title="Phone">
-              <a href={PHONE_HREF} className="inline-block transition-colors hover:text-forest">
-                {PHONE_DISPLAY}
-              </a>
+              <ul className="space-y-1">
+                {PHONE_NUMBERS.map((phone) => (
+                  <li key={phone.digits}>
+                    <a
+                      href={`tel:+${phone.digits}`}
+                      className="inline-block whitespace-nowrap tabular-nums transition-colors hover:text-forest"
+                    >
+                      {phone.display}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </InfoBlock>
           </div>
 

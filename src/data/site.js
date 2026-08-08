@@ -11,13 +11,29 @@
  */
 
 /**
- * The single business contact number used everywhere on the site.
- * Every phone link and Call CTA is built from these two constants — change them
- * here and the whole site follows.
+ * CALL CTA NUMBER — deliberately a single number.
+ *
+ * Every "Call" button, phone icon and dialer CTA across the site is built from
+ * these constants, so every direct-call action lands on the same line. Change
+ * it here and the whole site follows. Do not hard-code a number anywhere else.
  */
-export const PHONE_DISPLAY = '+91 87963 71248';
-export const PHONE_DIGITS = '918796371248';
+export const PHONE_DISPLAY = '+91 82874 40841';
+export const PHONE_DIGITS = '918287440841';
 export const PHONE_HREF = `tel:+${PHONE_DIGITS}`;
+
+/**
+ * PUBLISHED DIRECTORY — every reachable line, listed in the footer and in the
+ * Contact section's Phone block.
+ *
+ * This is separate from the call-CTA number above on purpose: the directory
+ * lists all lines, while Call buttons always route to one. Each entry is
+ * individually clickable via its own tel: link.
+ */
+export const PHONE_NUMBERS = [
+  { display: '+91 82874 40841', digits: '918287440841' },
+  { display: '+91 78387 37649', digits: '917838737649' },
+  { display: '+91 87963 71248', digits: '918796371248' },
+];
 
 /** Live Google Business Profile / Maps listing. */
 export const GOOGLE_BUSINESS_URL = 'https://maps.app.goo.gl/w7wQryRTsKEsRbgY6';

@@ -6,8 +6,7 @@ import {
   INSTAGRAM_URL,
   INSTAGRAM_HANDLE,
   GOOGLE_BUSINESS_URL,
-  PHONE_HREF,
-  PHONE_DISPLAY,
+  PHONE_NUMBERS,
 } from '../data/site';
 
 /**
@@ -50,6 +49,27 @@ export default function Footer({ linkPrefix = '', stickyBarSpace = true }) {
             <p className="mt-6 text-[13.5px] leading-relaxed text-sage/55">
               Rajouri Garden, New Delhi 110027
             </p>
+
+            {/* Directory of every published line. Call CTAs elsewhere on the
+                site always route to PHONE_HREF instead. */}
+            <div className="mt-8">
+              <h3 className="flex items-center gap-2 font-sans text-[11px] font-bold uppercase tracking-[0.2em] text-sage/50">
+                <Phone size={13} aria-hidden="true" />
+                Call Us
+              </h3>
+              <ul className="mt-4 grid gap-x-6 gap-y-2.5 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                {PHONE_NUMBERS.map((phone) => (
+                  <li key={phone.digits}>
+                    <a
+                      href={`tel:+${phone.digits}`}
+                      className="inline-block whitespace-nowrap py-1 text-[14.5px] tabular-nums text-sage/85 transition-colors hover:text-ivory"
+                    >
+                      {phone.display}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           <LinkColumn title="Quick Links" links={FOOTER_LINKS.quick} linkPrefix={linkPrefix} />
@@ -81,15 +101,6 @@ export default function Footer({ linkPrefix = '', stickyBarSpace = true }) {
                   >
                     <MapPin size={15} aria-hidden="true" />
                     Google Business Profile
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={PHONE_HREF}
-                    className="inline-flex items-center gap-2.5 text-[14.5px] text-sage/85 transition-colors hover:text-ivory"
-                  >
-                    <Phone size={15} aria-hidden="true" />
-                    {PHONE_DISPLAY}
                   </a>
                 </li>
               </ul>

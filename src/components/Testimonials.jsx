@@ -48,7 +48,9 @@ export default function Testimonials() {
         tabIndex={0}
         role="region"
         aria-label="Student stories carousel"
-        className="no-scrollbar -mx-5 mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0"
+        /* The bleed margin must match the container's own padding exactly, or
+           the scroller pushes past the viewport and the page scrolls sideways. */
+        className="no-scrollbar -mx-5 mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-4 lg:mx-0 lg:px-0"
       >
         {TESTIMONIALS.map((t, i) => (
           <figure

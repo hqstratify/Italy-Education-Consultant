@@ -32,10 +32,16 @@ correctly.
 
 ## ✅ Verified business details already wired in
 
-- **Phone** — **+91 87963 71248** is the only number on the site. Every phone link and Call
-  CTA is generated from `PHONE_DISPLAY` / `PHONE_DIGITS` in `src/data/site.js`, so changing
-  it in one place updates the whole site. All contact CTAs use `tel:+918796371248`, which
-  opens the dialer on mobile.
+- **Phone** — two distinct concepts, both in `src/data/site.js`:
+  - `PHONE_DISPLAY` / `PHONE_DIGITS` → **+91 82874 40841**. Every Call button, phone icon
+    and dialer CTA across the site is built from this, so all direct-call actions land on
+    one line (`tel:+918287440841`). Nothing hard-codes a number anywhere else.
+  - `PHONE_NUMBERS` → the three published lines (82874 40841, 78387 37649, 87963 71248),
+    listed in the **footer** and the **Contact section's Phone block**, each with its own
+    `tel:` link.
+
+  Keeping these separate is deliberate: the directory lists every reachable line, while
+  Call buttons always route to one. Don't collapse them into a single list.
 - **No WhatsApp, no business email** — WhatsApp has been removed entirely (no links, CTAs,
   icons or deep links anywhere), and no business email address is published. Contact routes
   are the phone number, the enquiry form and the Instagram profile.
@@ -68,6 +74,9 @@ present (Google Fonts, Google Maps). It claims no cookies, analytics, certificat
 partnerships that this site does not have. Update `LAST_UPDATED` in
 `src/legal/LegalPage.jsx` whenever you revise them, and have a legal professional review
 them before launch.
+
+Their contact line uses `PHONE_DISPLAY`, so it shows the call-CTA number (+91 82874 40841)
+and follows automatically if that constant changes.
 
 ## ⚠️ Still outstanding
 
