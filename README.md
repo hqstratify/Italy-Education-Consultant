@@ -33,9 +33,10 @@ correctly.
 ## ✅ Verified business details already wired in
 
 - **Phone** — two distinct concepts, both in `src/data/site.js`:
-  - `PHONE_DISPLAY` / `PHONE_DIGITS` → **+91 82874 40841**. Every Call button, phone icon
-    and dialer CTA across the site is built from this, so all direct-call actions land on
-    one line (`tel:+918287440841`). Nothing hard-codes a number anywhere else.
+  - `PHONE_DISPLAY` / `PHONE_DIGITS` → **+91 87963 71248**, the primary line. Every Call
+    button, phone icon and dialer CTA across the site — including the legal pages — is
+    built from this, so all direct-call actions land on one line (`tel:+918796371248`).
+    Nothing hard-codes a number anywhere else.
   - `PHONE_NUMBERS` → the three published lines (82874 40841, 78387 37649, 87963 71248),
     listed in the **footer** and the **Contact section's Phone block**, each with its own
     `tel:` link.
@@ -75,8 +76,8 @@ partnerships that this site does not have. Update `LAST_UPDATED` in
 `src/legal/LegalPage.jsx` whenever you revise them, and have a legal professional review
 them before launch.
 
-Their contact line uses `PHONE_DISPLAY`, so it shows the call-CTA number (+91 82874 40841)
-and follows automatically if that constant changes.
+Their contact line uses `PHONE_DISPLAY`, so it shows the primary number
+(+91 87963 71248) and follows automatically if that constant changes.
 
 ## ⚠️ Still outstanding
 
